@@ -3,7 +3,7 @@ name: Deploy to AWS Elastic Beanstalk
 on:
   push:
     branches:
-      - master  # Trigger deploy on push to main branch
+      - master  # Trigger deploy on push to master branch
 
 jobs:
   build:
@@ -64,9 +64,11 @@ jobs:
           # Install AWS EB CLI
           pip install awsebcli
 
-          # Configure AWS Elastic Beanstalk application
-          eb init -p dotnet core bidwheels-api-version-1 --region us-east-1  # Change 'bidwheels-api' to your Elastic Beanstalk application name
-          eb use Bidwheels-api-env  # Change 'my-environment' to your Elastic Beanstalk environment name
+          # Initialize Elastic Beanstalk application
+          eb init bidwheels-api-version-1 --platform "dotnetcore" --region us-east-1  # Corrected init command
+
+          # Use the environment (ensure the environment exists)
+          eb use Bidwheels-api-env  # Change to your actual Elastic Beanstalk environment name
 
           # Deploy the package
           eb deploy
