@@ -1,4 +1,5 @@
 using bid_wheels.Services.Infrastructure;
+using bid_wheels_api.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 
@@ -33,6 +34,8 @@ app.Run();
 static void ConfigureServices(IConfiguration configuration, IServiceCollection services)
 {
 	services.AddMvc();
+	services.AddDependencyInjectionConfiguration(configuration);
+
 	var connectionString = configuration["ConnectionStrings:PostgresConnection"];
 	var dbPassword = configuration["ConnectionStrings:DbPassword"];
 	var builder = new NpgsqlConnectionStringBuilder(connectionString)

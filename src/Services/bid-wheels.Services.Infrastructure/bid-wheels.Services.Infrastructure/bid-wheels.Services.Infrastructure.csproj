@@ -7,4 +7,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\bid-wheels.Services.Domain\bid-wheels.Services.Domain\bid-wheels.Services.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
