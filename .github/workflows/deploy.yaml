@@ -69,13 +69,9 @@ jobs:
         
       - name: Install AWS EB CLI
         run: pip install awsebcli
- 
-      - name: Initialize Elastic Beanstalk Application - I
-        run: eb init --interactive
         
       - name: Initialize Elastic Beanstalk Application - I
-        run: eb init bidwheels-api-version-1 --platform ".NET Core on Linux" --region us-east-1
-          
+        run: eb init bidwheels-api-version-2 --platform ".NET 8 running on 64bit Amazon Linux 2023/3.2.2" --region us-east-1
           
       - name: Use Elastic Beanstalk Environment
         run: eb use Bidwheels-api-env
