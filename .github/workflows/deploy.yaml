@@ -18,7 +18,7 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '8.0'  # Use the version of .NET Core you are using (e.g., 3.1, 5.0, 6.0)
+          dotnet-version: '6.0'  # Ensure this matches your .NET version
 
       # Restore NuGet packages
       - name: Restore dependencies
@@ -64,8 +64,8 @@ jobs:
           # Install AWS EB CLI
           pip install awsebcli
 
-          # Initialize Elastic Beanstalk application
-          eb init bidwheels-api-version-1 --platform ".NET 8 running on 64bit Amazon Linux 2023/3.2.2" --region us-east-1  # Corrected init command
+          # Initialize Elastic Beanstalk application with the correct platform
+          eb init bidwheels-api-version-1 --platform "64bit Amazon Linux 2 v3.3.6 running .NET 6" --region us-east-1  # Adjusted platform
 
           # Use the environment (ensure the environment exists)
           eb use Bidwheels-api-env  # Change to your actual Elastic Beanstalk environment name
