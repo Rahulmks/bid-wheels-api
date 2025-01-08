@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace bid_wheels.Services.Domain.Model
+﻿namespace bid_wheels.Services.Domain.Model
 {
 	public class Person
 	{
@@ -17,7 +11,5 @@ namespace bid_wheels.Services.Domain.Model
 		public DateTime? CreatedDate { get; set; }
 		public DateTime? LastModifiedDate { get; set; }
 		public string UserType { get; set; }
-		public ICollection<User> Users { get; set; } = new List<User>();
-		public ICollection<Driver> Drivers { get; set; } = new List<Driver>();
 	}
 }
