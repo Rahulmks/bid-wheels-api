@@ -65,7 +65,7 @@ jobs:
           pip install awsebcli
 
           # Configure AWS Elastic Beanstalk application
-          eb init -p dotnet core bidwheels-api --region us-east-1  # Change 'bidwheels-api' to your Elastic Beanstalk application name
+          eb init -p dotnet core bidwheels-api-version-1 --region us-east-1  # Change 'bidwheels-api' to your Elastic Beanstalk application name
           eb use Bidwheels-api-env  # Change 'my-environment' to your Elastic Beanstalk environment name
 
           # Deploy the package
