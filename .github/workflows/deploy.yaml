@@ -64,14 +64,6 @@ jobs:
           # Install AWS EB CLI
           pip install awsebcli
 
-          on:
-            push:
-              branches:
-                - master # Specify the branch name(s) to trigger the workflow
-            pull_request:
-              branches:
-                - master # Optional:
-
           # Initialize Elastic Beanstalk application with the correct platform
           eb init bidwheels-api-version-1 --platform ".NET 8 running on 64bit Amazon Linux 2023/3.2.2" --region us-east-1  # Adjusted platform
 
