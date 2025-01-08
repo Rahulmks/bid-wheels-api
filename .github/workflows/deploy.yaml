@@ -30,11 +30,11 @@ jobs:
 
       # Run tests (optional)
       - name: Run tests
-        run: dotnet test --configuration Release
+        run: dotnet test ./src/Services/ --configuration Release
 
       # Publish the project to a folder
       - name: Publish the project
-        run: dotnet publish --configuration Release --output ./publish
+        run: dotnet publish ./src/Services/ --configuration Release --output ./publish
 
       # Create zip package for Elastic Beanstalk deployment
       - name: Create zip for deployment
