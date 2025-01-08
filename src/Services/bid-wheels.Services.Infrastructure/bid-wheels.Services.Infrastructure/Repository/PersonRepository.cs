@@ -19,7 +19,7 @@ namespace bid_wheels.Services.Infrastructure.Repository
 
 		public Person GetPerson()
 		{
-			var person = _context.Person.Where(X => X.PersonId == 1)
+			var person = _context.Persons.Where(X => X.PersonId == 1)
 				.Select(person => person).First();
 
 			return person;

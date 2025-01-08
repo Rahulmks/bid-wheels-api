@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using bid_wheels.Services.Domain.Model;
+using bid_wheels_api.src.Services.bid_wheels.Services.Infrastructure.bid_wheels.Services.Infrastructure;
 
 namespace bid_wheels.Services.Infrastructure.EntityConfigurations
 {
@@ -8,7 +9,7 @@ namespace bid_wheels.Services.Infrastructure.EntityConfigurations
 	{
 		public void Configure(EntityTypeBuilder<Person> builder)
 		{
-			builder.ToTable("person", "dbo");
+			builder.ToTable(DatabaseTableNameConstants.Person, Constants.DEFAULT_SCHEMA);
 
 			builder.Property(entity => entity.PersonId)
 				   .HasColumnName("person_id");
@@ -25,8 +26,17 @@ namespace bid_wheels.Services.Infrastructure.EntityConfigurations
 			builder.Property(entity => entity.Password)
 				   .HasColumnName("password");
 
-			builder.Property(entity => entity.feedback)
-				   .HasColumnName("feedback");
+			builder.Property(entity => entity.Feedback)
+				   .HasColumnName("aggregate_feedback");
+
+			builder.Property(b => b.CreatedDate).
+				HasColumnName("created_date");
+
+			builder.Property(b => b.LastModifiedDate).
+				HasColumnName("last_modified_date");
+
+			builder.Property(b => b.UserType).
+				HasColumnName("user_type");
 
 			builder.HasKey(entity => entity.PersonId);
 
