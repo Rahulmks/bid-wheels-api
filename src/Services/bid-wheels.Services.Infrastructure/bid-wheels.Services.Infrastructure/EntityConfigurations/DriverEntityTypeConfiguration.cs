@@ -19,11 +19,6 @@ namespace bid_wheels.Services.Infrastructure.EntityConfigurations
 			builder.Property(b => b.GPSCoordinates).HasColumnName("gps_coordinates");
 			builder.Property(b => b.IsFull).HasColumnName("is_full");
 
-			builder.HasOne(d => d.Persons)
-			.WithMany(p => p.Drivers)
-			.HasForeignKey(d => d.PersonId)
-			.HasConstraintName("fk_driver_person_id");
-
 			builder.HasOne(d => d.Vehicles)
 			.WithMany(p => p.Drivers)
 			.HasForeignKey(d => d.VehicleId)

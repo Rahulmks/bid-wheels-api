@@ -14,10 +14,6 @@ namespace bid_wheels.Services.Infrastructure.EntityConfigurations
 			builder.Property(b => b.PersonId).HasColumnName("person_id");
 			builder.Property(b => b.UserId).HasColumnName("user_id");
 
-			builder.HasOne(d => d.Persons)
-			.WithMany(p => p.Users)
-			.HasForeignKey(d => d.PersonId)
-			.HasConstraintName("fk_person_id");
 		}
 
 	}
