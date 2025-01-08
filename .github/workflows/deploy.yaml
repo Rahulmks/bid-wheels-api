@@ -72,7 +72,6 @@ jobs:
         
       - name: Initialize Elastic Beanstalk Application - I
         run: eb init bidwheels-api-version-2 --platform '.NET 8 running on 64bit Amazon Linux 2023/3.2.2' --region us-east-1 
-          --BranchName master
           
       - name: Use Elastic Beanstalk Environment
         run: eb use Bidwheels-api-env
