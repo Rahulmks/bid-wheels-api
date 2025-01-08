@@ -66,9 +66,6 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0'
-          
-      - name: version list
-        run: eb platform select
         
       - name: Install AWS EB CLI
         run: pip install awsebcli
