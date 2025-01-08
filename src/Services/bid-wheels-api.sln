@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bid-wheels-api", "bid-wheels.Services.api\bid-wheels-api.csproj", "{78E43707-DA6A-48F0-B395-C9525F3A7A42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bid-wheels.Services.Infrastructure", "bid-wheels.Services.Infrastructure\bid-wheels.Services.Infrastructure\bid-wheels.Services.Infrastructure.csproj", "{815434DA-71A8-4321-835A-8D6BA87BBE0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bid-wheels.Services.Domain", "bid-wheels.Services.Domain\bid-wheels.Services.Domain\bid-wheels.Services.Domain.csproj", "{A0658EE3-FDF7-47AE-BD93-93DC92450D31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bid-wheels.Services.Core", "bid-wheels.Services.Core\bid-wheels.Services.Core\bid-wheels.Services.Core.csproj", "{007EC38D-CAD0-41C4-9185-3ED26E7C629D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{78E43707-DA6A-48F0-B395-C9525F3A7A42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78E43707-DA6A-48F0-B395-C9525F3A7A42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78E43707-DA6A-48F0-B395-C9525F3A7A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78E43707-DA6A-48F0-B395-C9525F3A7A42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{815434DA-71A8-4321-835A-8D6BA87BBE0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{815434DA-71A8-4321-835A-8D6BA87BBE0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{815434DA-71A8-4321-835A-8D6BA87BBE0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{815434DA-71A8-4321-835A-8D6BA87BBE0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0658EE3-FDF7-47AE-BD93-93DC92450D31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0658EE3-FDF7-47AE-BD93-93DC92450D31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0658EE3-FDF7-47AE-BD93-93DC92450D31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0658EE3-FDF7-47AE-BD93-93DC92450D31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{007EC38D-CAD0-41C4-9185-3ED26E7C629D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{007EC38D-CAD0-41C4-9185-3ED26E7C629D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{007EC38D-CAD0-41C4-9185-3ED26E7C629D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{007EC38D-CAD0-41C4-9185-3ED26E7C629D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F4C37B6C-D3A8-4FD3-9509-1082DA93F465}
+	EndGlobalSection
+EndGlobal
