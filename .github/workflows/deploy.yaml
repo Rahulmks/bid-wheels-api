@@ -61,14 +61,22 @@ jobs:
       # Deploy to AWS Elastic Beanstalk
       - name: Deploy to Elastic Beanstalk
         run: |
-          # Install AWS EB CLI
-          pip install awsebcli
-
-          # Initialize Elastic Beanstalk application with the correct platform
-          eb init bidwheels-api-version-1 --platform ".NET 8 running on 64bit Amazon Linux 2023/3.2.2" --region us-east-1  # Adjusted platform
-
-          # Use the environment (ensure the environment exists)
-          eb use Bidwheels-api-env  # Change to your actual Elastic Beanstalk environment name
-
-          # Deploy the package
-          eb deploy
+          - name: Checkout code
+        uses: actions/checkout@v3
+ 
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0'
+ 
+      - name: Install AWS EB CLI
+        run: pip install awsebcli
+ 
+      - name: Initialize Elastic Beanstalk Application
+        run: eb init bidwheels-api-version-1 --platform "dotnet 8 running on 64bit Amazon Linux 2023 v3.2.2" --region us-east-1
+ 
+      - name: Use Elastic Beanstalk Environment
+        run: eb use Bidwheels-api-env
+ 
+      - name: Deploy to Elastic Beanstalk
+        run: eb deploy
