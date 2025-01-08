@@ -33,6 +33,17 @@ app.Run();
 
 static void ConfigureServices(IConfiguration configuration, IServiceCollection services)
 {
+	services
+		 .AddCors(options =>
+		 {
+			 options.AddDefaultPolicy(policy =>
+			 {
+				 policy
+				   .AllowAnyOrigin()
+				   .WithMethods("DELETE", "GET", "POST", "PATCH");
+			 });
+		 });
+
 	services.AddMvc();
 	services.AddDependencyInjectionConfiguration(configuration);
 
