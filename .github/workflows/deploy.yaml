@@ -22,7 +22,7 @@ jobs:
 
       # Restore NuGet packages
       - name: Restore dependencies
-        run: dotnet restore .\src\Services\
+        run: dotnet restore ./src/Services/
 
       # Build the project
       - name: Build the project
