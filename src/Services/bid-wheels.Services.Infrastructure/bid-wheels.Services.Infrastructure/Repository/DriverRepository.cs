@@ -88,13 +88,15 @@ namespace bid_wheels.Services.Infrastructure.Repository
 				.Where(o => o.VehicleType == vehicle.VehicleType)
 				.Select(o => new DriverOrderResponse
 				{
+					OrderId = o.OrderId, 
+					UserId = o.UserId,
 					Source = o.Source,
 					Destination = o.Destination,
 					SourceGPSCoordinates = o.SourceGPSCoordinates,
 					DestinationGPSCoordinates = o.DestinationGPSCoordinates,
 					ProductType = o.ProductType,
 					PreferredTime = o.PreferredTime,
-					EstimatedCost = o.EstimatedCost,
+					EstimatedCost = 1233,
 					AlreadyBidded = driverBids.Contains(o.OrderId)
 				})
 				.ToList();
