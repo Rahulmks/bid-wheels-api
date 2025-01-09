@@ -10,6 +10,8 @@ namespace bid_wheels_api.Configuration
 			services.AddHttpContextAccessor();
 
 			services.AddScoped<IPersonRepository, PersonRepository>();
+			services.AddScoped<IDriverRepository, DriverRepository>();
+			services.AddScoped<IUserRepository, UserRepository>();
 
 			return services;
 		}
