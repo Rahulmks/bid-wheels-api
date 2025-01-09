@@ -43,6 +43,7 @@ namespace bid_wheels.Services.Infrastructure.Repository
 							 DestinationGPSCoordinates = o.DestinationGPSCoordinates,
 							 VehicleType = o.VehicleType,
 							 PreferredTime = o.PreferredTime,
+							 EstimatedCost = o.EstimatedCost,
 							 Status = o.Status,
 							 CreatedDate = o.CreatedDate,
 							 LastModifiedDate = o.LastModifiedDate,
@@ -75,6 +76,7 @@ namespace bid_wheels.Services.Infrastructure.Repository
 				DestinationGPSCoordinates = order.DestinationGPSCoordinates,
 				VehicleType = order.VehicleType,
 				PreferredTime = order.PreferredTime,
+				EstimatedCost = order.EstimatedCost,
 				Status = "Pending",
 				CreatedDate = DateTime.Now,
 				LastModifiedDate = DateTime.Now
@@ -103,6 +105,7 @@ namespace bid_wheels.Services.Infrastructure.Repository
 							  DestinationGPSCoordinates = o.DestinationGPSCoordinates,
 							  VehicleType = o.VehicleType,
 							  PreferredTime = o.PreferredTime,
+							  EstimatedCost = o.EstimatedCost,
 							  Status = o.Status,
 							  CreatedDate = o.CreatedDate
 						  }).FirstOrDefault();
@@ -126,6 +129,7 @@ namespace bid_wheels.Services.Infrastructure.Repository
 							  DestinationGPSCoordinates = oi.DestinationGPSCoordinates,
 							  VehicleType = oi.VehicleType,
 							  PreferredTime = oi.PreferredTime,
+							  EstimatedCost = oi.EstimatedCost,
 							  Status = oi.Status,
 							  CreatedDate = oi.CreatedDate
 

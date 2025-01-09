@@ -72,7 +72,8 @@ namespace bid_wheels.Services.Infrastructure.Repository
 				  SourceGPSCoordinates = orders.SourceGPSCoordinates,
 				  DestinationGPSCoordinates = orders.DestinationGPSCoordinates,
 				  ProductType = orders.ProductType,
-				  PreferredTime = orders.PreferredTime
+				  PreferredTime = orders.PreferredTime,
+				  EstimatedCost = orders.EstimatedCost
 				   }).ToList();
 
 			return result;
