@@ -53,7 +53,7 @@ namespace bid_wheels_api.Controllers
 		}
 
 		[HttpGet("GetOrders/{driverId}")]
-		public List<OrderBase> GetOrders(int driverId)
+		public List<DriverOrderResponse> GetOrders(int driverId)
 		{
 			var result = driverRepository.GetOrders(driverId);
 			return result;
