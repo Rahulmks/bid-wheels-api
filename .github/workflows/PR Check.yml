@@ -1,9 +1,9 @@
-name: Build Validation
+name: Build Validation - Check
 
 on:
-  push:
+  pull_request:
     branches:
-      - master  # Trigger deploy on push to main branch
+      - '*'  # Trigger deploy on push to main branch
 
 jobs:
   build:
