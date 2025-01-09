@@ -11,7 +11,7 @@ namespace bid_wheels.Services.Domain
 	{
 		public Task AddBidAsync(Bid bid);
 
-		public List<OrderBase> GetOrders(int driverId);
+		public List<DriverOrderResponse> GetOrders(int driverId);
 
 		public Task UpdateBidAsync(Bid bid);
 	}

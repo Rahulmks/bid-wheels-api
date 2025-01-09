@@ -58,23 +58,46 @@ namespace bid_wheels.Services.Infrastructure.Repository
 			}
 		}
 
-		public List<OrderBase> GetOrders(int driverId)
+		public List<DriverOrderResponse> GetOrders(int driverId)
 		{
-			var driver = dbContext.Drivers.Where(driver => driver.DriverId == driverId)
-				.Select(driver => driver).First();
+			var driver = dbContext.Drivers
+				.Where(d => d.DriverId == driverId)
+				.Select(d => d)
+				.FirstOrDefault();
 
-			var vehicle = dbContext.Vehicles.Where(v => v.VehicleId == driver.VehicleId).First();
+			if (driver == null)
+			{
+				throw new Exception("Driver not found");
+			}
 
-			var result = dbContext.Orders.Where(orders => orders.VehicleType == vehicle.VehicleType)
-				.Select(orders => new OrderBase
-				{ Source = orders.Source,
-				  Destination = orders.Destination,
-				  SourceGPSCoordinates = orders.SourceGPSCoordinates,
-				  DestinationGPSCoordinates = orders.DestinationGPSCoordinates,
-				  ProductType = orders.ProductType,
-				  PreferredTime = orders.PreferredTime,
-				  EstimatedCost = orders.EstimatedCost
-				   }).ToList();
+			var vehicle = dbContext.Vehicles
+				.Where(v => v.VehicleId == driver.VehicleId)
+				.FirstOrDefault();
+
+			if (vehicle == null)
+			{
+				throw new Exception("Vehicle not found");
+			}
+
+			var driverBids = dbContext.Bids
+				.Where(b => b.DriverId == driverId)
+				.Select(b => b.OrderId)
+				.ToHashSet();
+
+			var result = dbContext.Orders
+				.Where(o => o.VehicleType == vehicle.VehicleType)
+				.Select(o => new DriverOrderResponse
+				{
+					Source = o.Source,
+					Destination = o.Destination,
+					SourceGPSCoordinates = o.SourceGPSCoordinates,
+					DestinationGPSCoordinates = o.DestinationGPSCoordinates,
+					ProductType = o.ProductType,
+					PreferredTime = o.PreferredTime,
+					EstimatedCost = o.EstimatedCost,
+					AlreadyBidded = driverBids.Contains(o.OrderId)
+				})
+				.ToList();
 
 			return result;
 		}
