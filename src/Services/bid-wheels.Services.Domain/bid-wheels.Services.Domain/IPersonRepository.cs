@@ -12,5 +12,7 @@ namespace bid_wheels.Services.Domain
 		public Person GetPerson();
 		public List<OrderDTO> GetAllOrdersByPersonId(int personId);
 
+		public List<Bid> GetBids(int orderId);
+
 	}
 }

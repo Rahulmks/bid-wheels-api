@@ -31,5 +31,12 @@ namespace bid_wheels_api.Controllers
 			var orders = _personRepository.GetAllOrdersByPersonId(personId);
 			return orders;
 		}
+
+		[HttpGet("GetBid/{orderId}")]
+		public List<Bid> GetBid(int orderId)
+		{
+			var bids = _personRepository.GetBids(orderId);
+			return bids;
+		}
 	}
 }
