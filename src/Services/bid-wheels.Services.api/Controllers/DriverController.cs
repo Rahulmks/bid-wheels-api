@@ -52,8 +52,8 @@ namespace bid_wheels_api.Controllers
 			return Ok(HttpStatusCode.Created);
 		}
 
-		[HttpPost("GetOrders/{driverId}")]
-		public List<Order> GetOrders(int driverId)
+		[HttpGet("GetOrders/{driverId}")]
+		public List<OrderBase> GetOrders(int driverId)
 		{
 			var result = driverRepository.GetOrders(driverId);
 			return result;

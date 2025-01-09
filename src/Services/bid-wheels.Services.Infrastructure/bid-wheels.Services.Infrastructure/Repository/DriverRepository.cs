@@ -58,13 +58,22 @@ namespace bid_wheels.Services.Infrastructure.Repository
 			}
 		}
 
-		public List<Order> GetOrders(int driverId)
+		public List<OrderBase> GetOrders(int driverId)
 		{
 			var driver = dbContext.Drivers.Where(driver => driver.DriverId == driverId)
 				.Select(driver => driver).First();
 
-			var result = dbContext.Orders.Where(orders => orders.VehicleType == driver.Vehicles.VehicleType)
-				.Select(orders => orders).ToList();
+			var vehicle = dbContext.Vehicles.Where(v => v.VehicleId == driver.VehicleId).First();
+
+			var result = dbContext.Orders.Where(orders => orders.VehicleType == vehicle.VehicleType)
+				.Select(orders => new OrderBase
+				{ Source = orders.Source,
+				  Destination = orders.Destination,
+				  SourceGPSCoordinates = orders.SourceGPSCoordinates,
+				  DestinationGPSCoordinates = orders.DestinationGPSCoordinates,
+				  ProductType = orders.ProductType,
+				  PreferredTime = orders.PreferredTime
+				   }).ToList();
 
 			return result;
 		}
