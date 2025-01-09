@@ -16,7 +16,8 @@ namespace bid_wheels.Services.Infrastructure.EntityConfigurations
 			builder.Property(b => b.Source).HasColumnName("source");
 			builder.Property(b => b.Destination).HasColumnName("destination");
 			builder.Property(b => b.ProductType).HasColumnName("product_type");
-			builder.Property(b => b.GPSCoordinates).HasColumnName("gps_coordinates");
+			builder.Property(b => b.SourceGPSCoordinates).HasColumnName("source_gps_coordinates");
+			builder.Property(b => b.DestinationGPSCoordinates).HasColumnName("destination_gps_coordinates");
 			builder.Property(b => b.VehicleType).HasColumnName("vehicle_type");
 			builder.Property(b => b.PreferredTime).HasColumnName("preferred_time");
 			builder.Property(b => b.Status).HasColumnName("status");

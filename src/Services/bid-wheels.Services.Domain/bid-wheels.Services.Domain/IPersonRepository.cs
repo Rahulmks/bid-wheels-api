@@ -10,5 +10,7 @@ namespace bid_wheels.Services.Domain
 	public interface IPersonRepository
 	{
 		public Person GetPerson();
+		public List<OrderDTO> GetAllOrdersByPersonId(int personId);
+
 	}
 }
