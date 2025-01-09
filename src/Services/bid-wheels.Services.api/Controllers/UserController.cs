@@ -59,5 +59,11 @@ namespace bid_wheels_api.Controllers
 			await _userRepository.SelectBid(orderId, bidId);
 			return Ok(HttpStatusCode.Created);
 		}
+
+		[HttpPost("UpdateFeedback/{driverId}")]
+		public async Task<IActionResult> AddFeedback(int driverId)
+		{
+			return Ok(HttpStatusCode.Created);
+		}
 	}
 }
