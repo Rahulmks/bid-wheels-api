@@ -22,27 +22,34 @@ if (app.Environment.IsDevelopment())
 	app.UseSwagger();
 	app.UseSwaggerUI();
 }
-
+app.UseCors(
+		options => options.WithOrigins("http://localhost:3000")
+			.AllowAnyMethod()
+			.AllowAnyHeader()
+			.SetIsOriginAllowed(origin => true) // allow any origin
+			.AllowCredentials());
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
 
 static void ConfigureServices(IConfiguration configuration, IServiceCollection services)
 {
-	services
-		 .AddCors(options =>
-		 {
-			 options.AddDefaultPolicy(policy =>
-			 {
-				 policy
-				   .AllowAnyOrigin()
-				   .WithMethods("DELETE", "GET", "POST", "PATCH");
-			 });
-		 });
+	services.AddCors(options =>
+	{
+		options.AddDefaultPolicy(builder =>
+		{
+			builder
+			.AllowAnyMethod()
+			.AllowAnyHeader()
+			.AllowCredentials()
+			.SetIsOriginAllowedToAllowWildcardSubdomains()
+			.WithOrigins("http://localhost:3000")
+			.Build();
+		});
+	});
 
 	services.AddMvc();
 	services.AddDependencyInjectionConfiguration(configuration);

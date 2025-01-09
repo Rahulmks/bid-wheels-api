@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Npgsql;
 
@@ -17,6 +18,7 @@ namespace bid_wheels_api.Controllers
 			_configuration = configuration;
 		}
 
+		[EnableCors()]
 		[HttpGet("login", Name = "LoginAuthentication")]
 		public IActionResult Login([FromQuery] string userName, [FromQuery] string password)
 		{
