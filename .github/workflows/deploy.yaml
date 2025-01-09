@@ -65,7 +65,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: 'us-east-1'
         run: |
-          zip -r deploy.zip ./publish
           eb init -p ".NET 8 running on 64bit Amazon Linux 2023/3.2.2" bidwheels-api --region $AWS_REGION
           eb use Bidwheels-api-env
           eb deploy
