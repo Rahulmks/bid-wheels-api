@@ -20,7 +20,7 @@ namespace bid_wheels.Services.Infrastructure.Repository
 				dbContext.Database.CreateExecutionStrategy();
 
 				await dbContext.AddAsync(bid);
-
+				await dbContext.SaveChangesAsync();
 				await transaction.CommitAsync();
 			}
 			catch(Exception ex)
@@ -97,7 +97,17 @@ namespace bid_wheels.Services.Infrastructure.Repository
 					ProductType = o.ProductType,
 					PreferredTime = o.PreferredTime,
 					EstimatedCost = 1233,
-					AlreadyBidded = driverBids.Contains(o.OrderId)
+					AlreadyBidded = driverBids.Contains(o.OrderId),
+					Bid = o.Bids
+						.Where(b => b.DriverId == driverId && b.OrderId == o.OrderId)
+						.Select(b => new DriverBid
+						{
+							BidId = b.BidId,
+							Price = b.Price,
+							ServiceDays = b.ServiceDays,
+							DriverId = b.DriverId
+						})
+						.FirstOrDefault()
 				})
 				.ToList();
 

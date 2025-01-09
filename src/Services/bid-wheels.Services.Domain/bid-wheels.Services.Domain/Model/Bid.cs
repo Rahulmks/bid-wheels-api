@@ -5,8 +5,8 @@
 		public int BidId { get; set; }
 		public int OrderId { get; set; }
 		public int DriverId { get; set; }
-		public string Price { get; set; }
-		public string ServiceDays { get; set; }
+		public int Price { get; set; }
+		public int ServiceDays { get; set; }
 		public DateTime? CreatedDate { get; set; }
 		public DateTime? LastModifiedDate { get; set; }
 		public virtual Order Orders { get; set; } = null!;

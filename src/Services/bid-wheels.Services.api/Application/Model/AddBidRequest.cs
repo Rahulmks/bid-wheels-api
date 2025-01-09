@@ -5,9 +5,9 @@ namespace bid_wheels_api.Application.Model
 	public class AddBidRequest
 	{
 		[JsonPropertyName("price")]
-		public string Price { get; set; }
+		public int Price { get; set; }
 
 		[JsonPropertyName("daysRequired")]
-		public string DaysRequired { get; set; }
+		public int DaysRequired { get; set; }
 	}
 }

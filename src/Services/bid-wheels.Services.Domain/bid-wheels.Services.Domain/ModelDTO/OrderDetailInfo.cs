@@ -8,8 +8,8 @@
 		public int BidId { get; set; }
 		public int DriverId { get; set; }
 		public string DriverName { get; set; }
-		public string Price { get; set; }
-		public string ServiceDays { get; set; }
+		public int Price { get; set; }
+		public int ServiceDays { get; set; }
 		public DateTime? BidCreatedDate { get; set; }
 		public DateTime? BidLastModifiedDate { get; set; }
 		public int OrderInvoiceId { get; set; }

@@ -21,5 +21,15 @@ namespace bid_wheels.Services.Domain.Model
 		public int EstimatedCost { get; set; }
 
 		public Boolean AlreadyBidded { get; set; }
+		public DriverBid? Bid { get; set; }
+	}
+
+	public class DriverBid
+	{
+		public int BidId { get; set; }
+		public int OrderId { get; set; }
+		public int DriverId { get; set; }
+		public int Price { get; set; }
+		public int ServiceDays { get; set; }
 	}
 }

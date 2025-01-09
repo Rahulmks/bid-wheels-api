@@ -27,8 +27,8 @@ namespace bid_wheels_api.Controllers
 				ServiceDays = addBid.DaysRequired,
 				OrderId = orderId,
 				DriverId = driverId,
-				CreatedDate = DateAndTime.Now,
-				LastModifiedDate = DateAndTime.Now
+				CreatedDate = DateTime.UtcNow,
+				LastModifiedDate = DateTime.UtcNow
 			};
 
 			await driverRepository.AddBidAsync(Bid);
