@@ -1,7 +1,7 @@
-﻿using bid_wheels.Services.Domain;
+﻿using System.Net;
+using bid_wheels.Services.Domain;
 using bid_wheels.Services.Domain.Model;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace bid_wheels_api.Controllers
@@ -33,10 +33,10 @@ namespace bid_wheels_api.Controllers
 		}
 
 		[HttpPost("CreateOrder")]
-		public IActionResult CreateOrg([FromBody] OrderBase resource)
+		public async Task<IActionResult> CreateOrg([FromBody] OrderBase resource)
 		{
-			var org = _userRepository.AddOrder(resource);
-			return Ok(org);
+			await _userRepository.AddOrder(resource);
+			return Ok(HttpStatusCode.Created);
 		}
 
 		[HttpGet("GetCurrentOrderStatus/{OrderId}")]

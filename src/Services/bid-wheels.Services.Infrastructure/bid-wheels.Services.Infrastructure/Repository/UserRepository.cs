@@ -64,7 +64,7 @@ namespace bid_wheels.Services.Infrastructure.Repository
 			return result.FirstOrDefault();
 		}
 
-		public bool AddOrder(OrderBase order)
+		public async Task AddOrder(OrderBase order)
 		{
 			var newOrder = new Order()
 			{
@@ -81,9 +81,19 @@ namespace bid_wheels.Services.Infrastructure.Repository
 				CreatedDate = DateTime.Now,
 				LastModifiedDate = DateTime.Now
 			};
-			_context.Orders.Add(newOrder);
-			_context.SaveChanges();
-			return true;
+			await using var transaction = await _context.Database.BeginTransactionAsync();
+			try
+			{
+				_context.Orders.Add(newOrder);
+				_context.SaveChanges();
+
+				await transaction.CommitAsync();
+			}
+			catch (Exception ex)
+			{
+				await transaction.RollbackAsync();
+				throw;
+			}
 
 		}
 
