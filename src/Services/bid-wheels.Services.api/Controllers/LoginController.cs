@@ -4,7 +4,7 @@ using Npgsql;
 
 namespace bid_wheels_api.Controllers
 {
-	[Route("[controller]")]
+	[Route("")]
 	[ApiController]
 	public class LoginController : ControllerBase
 	{
