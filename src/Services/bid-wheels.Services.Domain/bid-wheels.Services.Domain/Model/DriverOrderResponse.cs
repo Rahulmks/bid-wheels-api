@@ -9,7 +9,7 @@ namespace bid_wheels.Services.Domain.Model
 	public class DriverOrderResponse
 	{
 		public int UserId { get; set; }
-
+		public string Name { get; set; }
 		public int OrderId { get; set; }
 		public string Source { get; set; }
 		public string Destination { get; set; }

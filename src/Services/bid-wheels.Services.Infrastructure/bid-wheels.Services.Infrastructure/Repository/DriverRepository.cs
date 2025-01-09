@@ -35,13 +35,15 @@ namespace bid_wheels.Services.Infrastructure.Repository
 			await using var transaction = await dbContext.Database.BeginTransactionAsync();
 			try
 			{
-				var existingBid = await dbContext.Bids.FindAsync(bid.BidId);
+				var existingBid =  dbContext.Bids.Where(bids => bids.BidId == bid.BidId)
+					.Select(bid => bid).First();
+
 				if (existingBid != null)
 				{
 					existingBid.Price = bid.Price;
 					existingBid.ServiceDays = bid.ServiceDays;
 					existingBid.LastModifiedDate = DateTime.UtcNow;
-
+					existingBid.CreatedDate = DateTime.UtcNow;
 					dbContext.Bids.Update(existingBid);
 					await dbContext.SaveChangesAsync();
 					await transaction.CommitAsync();
@@ -60,10 +62,12 @@ namespace bid_wheels.Services.Infrastructure.Repository
 
 		public List<DriverOrderResponse> GetOrders(int driverId)
 		{
+			
 			var driver = dbContext.Drivers
 				.Where(d => d.DriverId == driverId)
 				.Select(d => d)
 				.FirstOrDefault();
+
 
 			if (driver == null)
 			{
@@ -88,6 +92,7 @@ namespace bid_wheels.Services.Infrastructure.Repository
 				.Where(o => o.VehicleType == vehicle.VehicleType)
 				.Select(o => new DriverOrderResponse
 				{
+					Name = o.Users.Persons.Name,
 					OrderId = o.OrderId, 
 					UserId = o.UserId,
 					Source = o.Source,

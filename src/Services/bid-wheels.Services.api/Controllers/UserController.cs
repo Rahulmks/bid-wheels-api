@@ -60,10 +60,12 @@ namespace bid_wheels_api.Controllers
 			return Ok(HttpStatusCode.Created);
 		}
 
-		[HttpPost("UpdateFeedback/{driverId}")]
-		public async Task<IActionResult> AddFeedback(int driverId)
+		[HttpPost("AddFeedback/{driverId}")]
+		public async Task<IActionResult> AddFeedback([FromRoute]int driverId, [FromQuery]int rating)
 		{
+			await _userRepository.AddFeedback(driverId, rating);
 			return Ok(HttpStatusCode.Created);
 		}
+
 	}
 }

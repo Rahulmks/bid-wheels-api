@@ -241,5 +241,36 @@ namespace bid_wheels.Services.Infrastructure.Repository
 				throw;
 			}
 		}
+
+		public async Task AddFeedback(int driverId, int ratings)
+		{
+			await using var transaction = await _context.Database.BeginTransactionAsync();
+			try
+			{
+				var driver = await _context.Drivers.FindAsync(driverId);
+				if (driver == null)
+				{
+					throw new Exception("Driver not found");
+				}
+
+				var person = await _context.Persons.FindAsync(driver.PersonId);
+				if (person == null)
+				{
+					throw new Exception("Person not found");
+				}
+
+				person.AggreagateFeedback = (person.AggreagateFeedback) + ratings;
+				person.No_of_Reviews = (person.No_of_Reviews) + 1;
+
+				_context.Persons.Update(person);
+				await _context.SaveChangesAsync();
+				await transaction.CommitAsync();
+			}
+			catch (Exception ex)
+			{
+				await transaction.RollbackAsync();
+				throw;
+			}
+		}
 	}
 }

@@ -9,5 +9,7 @@ namespace bid_wheels.Services.Domain
 		public OrderDTO GetCurrentOrderStatusByOrderId(int orderId);
 		public List<OrderDTO> GetAllOrdersByUserId(int userId);
 		public Task SelectBid(int orderId, int bidId);
+
+		public Task AddFeedback(int driverId, int ratings);
 	}
 }

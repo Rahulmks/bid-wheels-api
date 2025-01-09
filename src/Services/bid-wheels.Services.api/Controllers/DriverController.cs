@@ -41,6 +41,7 @@ namespace bid_wheels_api.Controllers
 		{
 			var Bid = new Bid()
 			{
+				BidId = bidId,
 				Price = addBid.Price,
 				ServiceDays = addBid.DaysRequired,
 				CreatedDate = DateAndTime.Now,
