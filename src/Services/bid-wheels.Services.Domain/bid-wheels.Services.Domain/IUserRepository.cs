@@ -18,5 +18,7 @@ namespace bid_wheels.Services.Domain
 
 
 		//public IEnumerable<Bid> GetAllBidsByOrderId(int orderId);
+
+		public List<OrderDTO> GetAllOrdersByUserId(int userId);
 	}
 }

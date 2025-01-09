@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace bid_wheels_api.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("[controller]")]
 	[ApiController]
 	[EnableCors()]
 	public class UserController : ControllerBase
@@ -32,20 +32,25 @@ namespace bid_wheels_api.Controllers
 			return user;
 		}
 
-		[HttpGet("CreateOrg")]
+		[HttpPost("CreateOrder")]
 		public IActionResult CreateOrg([FromBody] OrderBase resource)
 		{
 			var org = _userRepository.AddOrder(resource);
 			return Ok(org);
 		}
 
-		[HttpGet("GetCurrentOrder/{OrderId}")]
+		[HttpGet("GetCurrentOrderStatus/{OrderId}")]
 		public OrderDTO GetCurrentOrder(int OrderId)
 		{
 			var order = _userRepository.GetCurrentOrderStatusByOrderId(OrderId);
 			return order;
 		}
 
-
+		[HttpGet("GetOrders/{userId}")]
+		public List<OrderDTO> GetOrdersByDriverId(int userId)
+		{
+			var orders = _userRepository.GetAllOrdersByUserId(userId);
+			return orders;
+		}
 	}
 }

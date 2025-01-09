@@ -44,5 +44,11 @@ namespace bid_wheels.Services.Infrastructure.Repository
 
 			return result;
 		}
+
+		public List<Bid> GetBids(int orderId)
+		{
+			var bids = _context.Bids.Where(orders => orders.OrderId == orderId).ToList();
+			return bids;
+		}
 	}
 }

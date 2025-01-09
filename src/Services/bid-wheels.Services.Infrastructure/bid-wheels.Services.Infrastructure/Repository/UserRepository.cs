@@ -108,5 +108,30 @@ namespace bid_wheels.Services.Infrastructure.Repository
 						  }).FirstOrDefault();
 			return result;
 		}
+
+		public List<OrderDTO> GetAllOrdersByUserId(int userId)
+		{
+			var result = (from oi in _context.Orders
+						  join u in _context.Users on oi.UserId equals u.UserId
+						  join p in _context.Persons on u.PersonId equals p.PersonId
+						  where p.PersonId == userId
+						  select new OrderDTO()
+						  {
+							  OrderId = oi.OrderId,
+							  UserId = oi.UserId,
+							  Source = oi.Source,
+							  Destination = oi.Destination,
+							  ProductType = oi.ProductType,
+							  SourceGPSCoordinates = oi.SourceGPSCoordinates,
+							  DestinationGPSCoordinates = oi.DestinationGPSCoordinates,
+							  VehicleType = oi.VehicleType,
+							  PreferredTime = oi.PreferredTime,
+							  Status = oi.Status,
+							  CreatedDate = oi.CreatedDate
+
+						  }).ToList();
+
+			return result;
+		}
 	}
 }

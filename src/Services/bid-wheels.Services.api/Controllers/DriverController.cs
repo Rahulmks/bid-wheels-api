@@ -35,5 +35,28 @@ namespace bid_wheels_api.Controllers
 
 			return Ok(HttpStatusCode.Created);
 		}
+
+		[HttpPost("UpdateBid/{bidId}")]
+		public async Task<IActionResult> UpdateBid([FromRoute] int bidId, [FromBody] AddBidRequest addBid)
+		{
+			var Bid = new Bid()
+			{
+				Price = addBid.Price,
+				ServiceDays = addBid.DaysRequired,
+				CreatedDate = DateAndTime.Now,
+				LastModifiedDate = DateAndTime.Now
+			};
+
+			await driverRepository.UpdateBidAsync(Bid);
+
+			return Ok(HttpStatusCode.Created);
+		}
+
+		[HttpGet("GetOrders/{driverId}")]
+		public List<OrderBase> GetOrders(int driverId)
+		{
+			var result = driverRepository.GetOrders(driverId);
+			return result;
+		}
 	}
 }
