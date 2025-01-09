@@ -60,21 +60,12 @@ jobs:
 
       # Deploy to AWS Elastic Beanstalk
       - name: Deploy to Elastic Beanstalk
-        uses: actions/checkout@v3
- 
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '8.0'
-        
-      - name: Install AWS EB CLI
-        run: pip install awsebcli
-        
-      - name: Initialize Elastic Beanstalk Application - I
-        run: eb init bidwheels-api-version-2 --platform "net8.0" --region us-east-1 
-          
-      - name: Use Elastic Beanstalk Environment
-        run: eb use Bidwheels-api-env
- 
-      - name: Deploy to Elastic Beanstalk
-        run: eb deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: 'us-east-1'
+        run: |
+          zip -r deploy.zip ./publish
+          eb init -p ".NET 8 running on 64bit Amazon Linux 2023/3.2.2" bidwheels-api --region $AWS_REGION
+          eb use Bidwheels-api-env
+          eb deploy
