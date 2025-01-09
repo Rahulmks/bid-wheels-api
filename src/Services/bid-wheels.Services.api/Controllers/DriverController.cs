@@ -4,6 +4,7 @@ using bid_wheels.Services.Domain.Model;
 using bid_wheels.Services.Infrastructure;
 using bid_wheels.Services.Infrastructure.Repository;
 using bid_wheels_api.Application.Model;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 
@@ -13,6 +14,7 @@ namespace bid_wheels_api.Controllers
 {
 	[Route("[controller]")]
 	[ApiController]
+	[EnableCors()]
 	public class DriverController(IDriverRepository driverRepository) : ControllerBase
 	{
 

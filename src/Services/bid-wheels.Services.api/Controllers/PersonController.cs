@@ -1,5 +1,6 @@
 ﻿using bid_wheels.Services.Domain;
 using bid_wheels.Services.Domain.Model;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace bid_wheels_api.Controllers
 {
 	[Route("[controller]")]
 	[ApiController]
+	[EnableCors()]
 	public class PersonController : ControllerBase
 	{
 		private readonly ILogger<PersonController> _logger;
