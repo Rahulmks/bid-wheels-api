@@ -85,7 +85,7 @@ namespace bid_wheels.Services.Infrastructure.Repository
 			try
 			{
 				_context.Orders.Add(newOrder);
-				_context.SaveChanges();
+				await _context.SaveChangesAsync();
 
 				await transaction.CommitAsync();
 			}
@@ -146,6 +146,74 @@ namespace bid_wheels.Services.Infrastructure.Repository
 						  }).ToList();
 
 			return result;
+		}
+
+		public async Task SelectBid(int orderId, int bidId)
+		{
+			await using var transaction = await _context.Database.BeginTransactionAsync();
+			try
+			{
+				await AddOrderInvoice(orderId, bidId);
+
+				var bids = (from bid in _context.Bids
+							where bid.OrderId == orderId && bid.BidId != bidId
+							select bid).ToList();
+				if (bids.Count > 0)
+				{
+					_context.Bids.RemoveRange(bids);
+					await _context.SaveChangesAsync();
+				}
+
+				await transaction.CommitAsync();
+			}
+			catch (Exception ex)
+			{
+				await transaction.RollbackAsync();
+				throw;
+			}
+		}
+
+		public async Task DeleteOtherBidsByOrderId(int orderId, int bidId)
+		{
+			await using var transaction = await _context.Database.BeginTransactionAsync();
+			try
+			{
+				var bids = (from bid in _context.Bids
+							where bid.OrderId == orderId && bid.BidId != bidId
+							select bid).ToList();
+				if (bids.Count > 0)
+				{
+					_context.Bids.RemoveRange(bids);
+					await _context.SaveChangesAsync();
+				}
+				await transaction.CommitAsync();
+			}
+			catch (Exception ex)
+			{
+				await transaction.RollbackAsync();
+				throw;
+			}
+		}
+
+		public async Task AddOrderInvoice(int orderId, int bidId)
+		{
+			await using var transaction = await _context.Database.BeginTransactionAsync();
+			try
+			{
+				var invoice = new OrderInvoice()
+				{
+					OrderId = orderId,
+					BidId = bidId
+				};
+				_context.OrderInvoices.Add(invoice);
+				await _context.SaveChangesAsync();
+				await transaction.CommitAsync();
+			}
+			catch (Exception ex)
+			{
+				await transaction.RollbackAsync();
+				throw;
+			}
 		}
 	}
 }

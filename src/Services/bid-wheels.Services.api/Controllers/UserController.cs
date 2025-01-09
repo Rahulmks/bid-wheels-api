@@ -52,5 +52,12 @@ namespace bid_wheels_api.Controllers
 			var orders = _userRepository.GetAllOrdersByUserId(userId);
 			return orders;
 		}
+
+		[HttpPost("SelectBid/{orderId}/{bidId}")]
+		public async Task<IActionResult> SelectBid(int orderId, int bidId)
+		{
+			await _userRepository.SelectBid(orderId, bidId);
+			return Ok(HttpStatusCode.Created);
+		}
 	}
 }
