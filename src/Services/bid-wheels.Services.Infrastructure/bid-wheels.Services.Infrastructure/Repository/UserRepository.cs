@@ -61,10 +61,10 @@ namespace bid_wheels.Services.Infrastructure.Repository
 							 DeliverStatus = os.Status,
 							 OrderStatusId = os.OrderStatusId
 						 };
-			return result.FirstOrDefault();
+			return result.FirstOrDefault() ?? new OrderDetailInfo();
 		}
 
-		public bool AddOrder(OrderBase order)
+		public async Task AddOrder(OrderBase order)
 		{
 			var newOrder = new Order()
 			{
@@ -81,9 +81,19 @@ namespace bid_wheels.Services.Infrastructure.Repository
 				CreatedDate = DateTime.Now,
 				LastModifiedDate = DateTime.Now
 			};
-			_context.Orders.Add(newOrder);
-			_context.SaveChanges();
-			return true;
+			await using var transaction = await _context.Database.BeginTransactionAsync();
+			try
+			{
+				_context.Orders.Add(newOrder);
+				await _context.SaveChangesAsync();
+
+				await transaction.CommitAsync();
+			}
+			catch (Exception ex)
+			{
+				await transaction.RollbackAsync();
+				throw;
+			}
 
 		}
 
@@ -109,7 +119,7 @@ namespace bid_wheels.Services.Infrastructure.Repository
 							  Status = o.Status,
 							  CreatedDate = o.CreatedDate
 						  }).FirstOrDefault();
-			return result;
+			return result ?? new OrderDTO();
 		}
 
 		public List<OrderDTO> GetAllOrdersByUserId(int userId)
@@ -136,6 +146,100 @@ namespace bid_wheels.Services.Infrastructure.Repository
 						  }).ToList();
 
 			return result;
+		}
+
+		public async Task SelectBid(int orderId, int bidId)
+		{
+			await using var transaction = await _context.Database.BeginTransactionAsync();
+			try
+			{
+				await AddOrderInvoice(orderId, bidId);
+				await UpdateOrderStatus(orderId);
+
+				var bids = (from bid in _context.Bids
+							where bid.OrderId == orderId && bid.BidId != bidId
+							select bid).ToList();
+				if (bids.Count > 0)
+				{
+					_context.Bids.RemoveRange(bids);
+					await _context.SaveChangesAsync();
+				}
+				await transaction.CommitAsync();
+			}
+			catch (Exception ex)
+			{
+				await transaction.RollbackAsync();
+				throw;
+			}
+		}
+
+		public async Task DeleteOtherBidsByOrderId(int orderId, int bidId)
+		{
+			await using var transaction = await _context.Database.BeginTransactionAsync();
+			try
+			{
+				var bids = (from bid in _context.Bids
+							where bid.OrderId == orderId && bid.BidId != bidId
+							select bid).ToList();
+				if (bids.Count > 0)
+				{
+					_context.Bids.RemoveRange(bids);
+					await _context.SaveChangesAsync();
+				}
+				await transaction.CommitAsync();
+			}
+			catch (Exception ex)
+			{
+				await transaction.RollbackAsync();
+				throw;
+			}
+		}
+
+		public async Task AddOrderInvoice(int orderId, int bidId)
+		{
+			await using var transaction = await _context.Database.BeginTransactionAsync();
+			try
+			{
+				var invoice = new OrderInvoice()
+				{
+					OrderId = orderId,
+					BidId = bidId
+				};
+				_context.OrderInvoices.Add(invoice);
+				await _context.SaveChangesAsync();
+				await transaction.CommitAsync();
+			}
+			catch (Exception ex)
+			{
+				await transaction.RollbackAsync();
+				throw;
+			}
+		}
+
+		public async Task UpdateOrderStatus(int orderId)
+		{
+			await using var transaction = await _context.Database.BeginTransactionAsync();
+			try
+			{
+				var order = _context.Orders.Find(orderId);
+				if (order != null)
+				{
+					order.Status = "In Progress";
+					order.LastModifiedDate = DateTime.Now;
+					_context.Orders.Update(order);
+					await _context.SaveChangesAsync();
+					await transaction.CommitAsync();
+				}
+				else
+				{
+					throw new Exception("Order not found");
+				}
+			}
+			catch (Exception ex)
+			{
+				await transaction.RollbackAsync();
+				throw;
+			}
 		}
 	}
 }
