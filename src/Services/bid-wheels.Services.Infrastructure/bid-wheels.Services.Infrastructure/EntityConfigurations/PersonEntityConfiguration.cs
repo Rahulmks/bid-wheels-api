@@ -26,9 +26,6 @@ namespace bid_wheels.Services.Infrastructure.EntityConfigurations
 			builder.Property(entity => entity.Password)
 				   .HasColumnName("password");
 
-			builder.Property(entity => entity.Feedback)
-				   .HasColumnName("aggregate_feedback");
-
 			builder.Property(b => b.CreatedDate).
 				HasColumnName("created_date");
 
@@ -37,6 +34,12 @@ namespace bid_wheels.Services.Infrastructure.EntityConfigurations
 
 			builder.Property(b => b.UserType).
 				HasColumnName("user_type");
+			
+			builder.Property(b => b.No_of_Reviews).
+				HasColumnName("No_of_Reviews");
+
+			builder.Property(b => b.AggreagateFeedback).
+				HasColumnName("aggregate_feedback");
 
 			builder.HasKey(entity => entity.PersonId);
 
