@@ -39,7 +39,7 @@ jobs:
       # Create zip package for Elastic Beanstalk deployment
       - name: Create zip for deployment
         run: |
-          zip -r deploy-package.zip ./publish/*
+          zip -r deploy.zip ./publish/*
 
   deploy:
     runs-on: ubuntu-latest
