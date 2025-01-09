@@ -10,6 +10,7 @@
 		public string DestinationGPSCoordinates { get; set; }
 		public string VehicleType { get; set; }
 		public int PreferredTime { get; set; }
+		public int EstimatedCost { get; set; }
 	}
 
 	public class OrderDTO : OrderBase

@@ -37,6 +37,7 @@ namespace bid_wheels.Services.Infrastructure.Repository
 				DestinationGPSCoordinates = o.DestinationGPSCoordinates,
 				VehicleType = o.VehicleType,
 				PreferredTime = o.PreferredTime,
+				EstimatedCost = o.EstimatedCost,
 				Status = o.Status,
 				CreatedDate = o.CreatedDate
 

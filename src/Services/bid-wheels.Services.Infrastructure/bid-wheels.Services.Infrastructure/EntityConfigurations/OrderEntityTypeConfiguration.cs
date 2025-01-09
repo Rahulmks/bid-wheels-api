@@ -20,6 +20,7 @@ namespace bid_wheels.Services.Infrastructure.EntityConfigurations
 			builder.Property(b => b.DestinationGPSCoordinates).HasColumnName("destination_gps_coordinates");
 			builder.Property(b => b.VehicleType).HasColumnName("vehicle_type");
 			builder.Property(b => b.PreferredTime).HasColumnName("preferred_time");
+			builder.Property(b => b.EstimatedCost).HasColumnName("estimated_cost");
 			builder.Property(b => b.Status).HasColumnName("status");
 			builder.Property(b => b.CreatedDate).HasColumnName("created_date");
 			builder.Property(b => b.LastModifiedDate).HasColumnName("last_modified_date");
